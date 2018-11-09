@@ -1,6 +1,6 @@
 # TP Compilation : Génération d'arbres abstraits
 
-L'objectif du TP est d'utiliser les outils JFlex et CUP pour générer des arbres abstraits correspondant à un sous ensemble du langage λ-ada.
+L'objectif du TP est d'utiliser les outils JFlex et CUP pour générer des arbres abstraits correspondant à un sous ensemble du langage **λ-ada**.
 
 ## Exercice 1 :
 
@@ -33,7 +33,7 @@ Une fois l'arbre généré, récupérez le dans le programme pricipal et affiche
 
 ## Exercice 2 :
 
-Compléter la grammaire précédente en y ajoutant les opérateurs booléens, ceux de comparaison, la boucle et la conditionnelle, afin d'obtenir un sous-ensemble du langage λ-ada un peu plus complet.
+Compléter la grammaire précédente en y ajoutant les opérateurs booléens, ceux de comparaison, la boucle et la conditionnelle, afin d'obtenir un sous-ensemble du langage **λ-ada** un peu plus complet.
 
 Grammaire abstraite du sous-ensemble de λ-ada correspondant :
 ```
