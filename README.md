@@ -24,7 +24,9 @@ L'expression
 let prixTtc =  prixHt * 119 / 100;
 prixTtc + 100
 ```
-pourra donner, par exemple, l'arbre suivant : ![exemple arbre abtrait](arbre.png "arbre abstrait")
+pourra donner, par exemple, l'arbre suivant :
+
+![exemple arbre abtrait](arbre.png "arbre abstrait")
 
 Une fois l'arbre généré, récupérez le dans le programme pricipal et affichez le, par exemple sous la forme d'une expression préfixée parenthésée :
 `(; (LET prixTtc (/ (* prixHt 119) 100)) (+ prixTtc 100))`
