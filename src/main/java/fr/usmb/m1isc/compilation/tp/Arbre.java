@@ -1,6 +1,6 @@
 package fr.usmb.m1isc.compilation.tp;
 
-public class Arbre {
+class Arbre {
 
     private NoeudType type;
     private String val;
@@ -14,8 +14,10 @@ public class Arbre {
         this.fg = fg;
     }
 
+
+
     void AfficheArbre(){
-        System.out.print( " ( " +  val + " " );
+        System.out.print( " " +  val + " " );
         if (fg != null)
             fg.AfficheArbre();
         else
@@ -25,5 +27,21 @@ public class Arbre {
         else
             System.out.print(" ");
         //System.out.print(" )");
+    }
+
+    NoeudType getType() {
+        return type;
+    }
+
+    String getVal() {
+        return val;
+    }
+
+    Arbre getFg() {
+        return fg;
+    }
+
+    Arbre getFd() {
+        return fd;
     }
 }

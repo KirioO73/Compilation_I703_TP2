@@ -64,9 +64,9 @@ sequence ::= expression:e1 SEMI sequence:e2 {: RESULT= new Arbre(NoeudType.SEMI,
 	 	   ;
 
 // une expession est soit une affectation ,une 			 
-expression ::= expr:e                               {:RESULT= e;:}
+expression ::= expr:e                               {: RESULT= e;:}
              | LET IDENT:nom EGAL expr:e            {: RESULT= new Arbre(NoeudType.LET, "LET", new Arbre(NoeudType.IDENT, nom, null, null), e);:}
-             | WHILE expr:cond DO expression:e
+             | WHILE expr:cond DO expression:e      {: RESULT= new Arbre(NoeudType.WHILE, "WHILE",  cond, e);:}
              | IF expr:cond THEN expression:a1 ELSE expression:a2
              | error // reprise d'erreurs
 			 ;

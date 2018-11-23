@@ -16,6 +16,7 @@ public enum NoeudType {
     MOD,
     OUTPUT,
     INPUT,
+    WHILE,
     LET,
     NIL,
     IDENT,

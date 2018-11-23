@@ -4,29 +4,46 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
-public class codeGenerator {
+class codeGenerator {
     private Arbre A;
     private List<String> variables;
-    private PrintWriter PW;
+    //private PrintWriter PW;
 
     codeGenerator( Arbre A, String Path) throws FileNotFoundException {
         this.A = A;
-        PW = new PrintWriter(new FileOutputStream(Path));
-        genereData();
-        genereCode();
+        this.variables = new ArrayList<String>();
+        PrintWriter PW = new PrintWriter(new FileOutputStream(Path));
+        genereData(PW);
+        genereCode(PW);
+        PW.close();
     }
 
-    void genereData(){
-        PW.write("DATA SEGMEN");
+    private void genereData(PrintWriter PW){
+        PW.println("DATA SEGMENT");
         // TODO : Get all data from arbre
-        PW.write("DATA ENDS");
+        findLet(A);
+        PW.println("DATA ENDS");
     }
 
-    void genereCode(){
-        PW.write("CODE SEGMENT");
+    private void findLet(Arbre T) {
+        if (T == null) return;
+        else {
+            if (T.getType() == NoeudType.LET) {
+                this.variables.add(T.getFd().getVal());
+                findLet(T.getFg());
+            } else {
+                findLet(T.getFd());
+                findLet(T.getFg());
+            }
+        }
+    }
+
+    private void genereCode(PrintWriter PW){
+        PW.println("CODE SEGMENT");
         // TODO : Get all codes from arbre
-        PW.write("CODE ENDS");
+        PW.println("CODE ENDS");
     }
 }
