@@ -15,9 +15,15 @@ public class Arbre {
     }
 
     void AfficheArbre(){
-        System.out.print("( " + val + " ");
-        fg.AfficheArbre();
-        fd.AfficheArbre();
-        System.out.print(" )");
+        System.out.print( " ( " +  val + " " );
+        if (fg != null)
+            fg.AfficheArbre();
+        else
+            System.out.print(" ");
+        if (fd != null)
+            fd.AfficheArbre();
+        else
+            System.out.print(" ");
+        //System.out.print(" )");
     }
 }

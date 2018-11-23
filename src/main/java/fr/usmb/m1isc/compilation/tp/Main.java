@@ -11,13 +11,15 @@ public class Main {
 		 LexicalAnalyzer yy;
 		 if (args.length > 0)
 		        yy = new LexicalAnalyzer(new FileReader(args[0])) ;
-		    else
+		 else
 		        yy = new LexicalAnalyzer(new InputStreamReader(System.in)) ;
 		@SuppressWarnings("deprecation")
+
 		parser p = new parser (yy);
 		Symbol s = p.parse( );
-        //System.out.println("I'MMMMMM BOOOOOOB");
 		Arbre a = (Arbre) s.value;
+		// TODO: generer code
+        codeGenerator G = new codeGenerator(a, "" );
 		a.AfficheArbre();
 	}
 
