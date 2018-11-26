@@ -61,12 +61,27 @@ class codeGenerator {
                 case ENTIER:
                     ecrireEntier(a);
                     break;
+                case INPUT:
+                    input();
+                    break;
+                case OUTPUT:
+                    output();
+                    break;
                 default:
                     parcourArbre(a.getFg());
                     parcourArbre(a.getFd());
                     PW.println("Default");
             }
         }
+    }
+
+    private void output() {
+        PW.println("out eax");
+    }
+
+    private void input() {
+        PW.println("in eax");
+
     }
 
     private void ecrireEntier(Arbre a) {
