@@ -42,11 +42,12 @@ class codeGenerator {
 
     private void genereCode(){
         PW.println("CODE SEGMENT");
-        // TODO : Get all codes from arbre
         parcourArbre(A);
         PW.println("CODE ENDS");
     }
 
+    int n_if = 0;
+    int n_while = 0;
     private void parcourArbre( Arbre a) {
         if(a==null);
         else{
@@ -85,6 +86,11 @@ class codeGenerator {
                     ecrireMul(a);
                     break;
 
+                case IF:
+                    ecrireIf(a);
+                    break;
+                case WHILE:
+
                 default:
                     parcourArbre(a.getFg());
                     parcourArbre(a.getFd());
@@ -93,8 +99,9 @@ class codeGenerator {
         }
     }
 
+
+    // Input/Output
     private void ecrireOutput(Arbre a) {
-        //vérif => Modif récup val dans eax puis out eax
         parcourArbre(a.getFg());
         PW.println("    out eax");
     }
@@ -103,6 +110,14 @@ class codeGenerator {
         PW.println("    in eax");
     }
 
+    // LET
+    private void ecrireLet(Arbre a) {
+        parcourArbre(a.getFd());
+        PW.println("    mov " + a.getFg().getVal() + ", eax" );
+    }
+
+
+    //Arithmétiques
     private void ecrirePlus(Arbre a) {
         parcourArbre(a.getFg());
         PW.println("    push eax");
@@ -136,6 +151,58 @@ class codeGenerator {
         PW.println("    mov eax, ebx");
     }
 
+    //Operators Boolean
+    private void ecrireEqual(Arbre a) {
+        parcourArbre(a.getFg());
+        PW.println("    push eax");
+        parcourArbre(a.getFd());
+        PW.println("    pop ebx");
+        PW.println("    sub eax, ebx");
+    }
+
+    private void ecrireGT(Arbre a) {
+        parcourArbre(a.getFg());
+        PW.println("    push eax");
+        parcourArbre(a.getFd());
+        PW.println("    pop ebx");
+        PW.println("    sub eax, ebx");
+    }
+
+    private void ecrireGTE(Arbre a) {
+        parcourArbre(a.getFg());
+        PW.println("    push eax");
+        parcourArbre(a.getFd());
+        PW.println("    pop ebx");
+        PW.println("    sub eax, ebx");
+    }
+
+    // Conditionals
+    private void ecrireIf(Arbre a) {
+        n_if++;
+        switch(a.getFg().getType()){
+            case EGAL:
+                ecrireEqual(a.getFg());
+                PW.println("    jz vrai_if_" + n_if );
+                PW.println("    jmp faux_if_" + n_if);
+                break;
+            case GT:
+                ecrireGT(a.getFg());
+                PW.println("    jl vrai_if_" + n_if );
+                PW.println("    jmp faux_if_" + n_if);
+                break;
+            case GTE:
+                ecrireGTE(a.getFg());
+                PW.println("    jle vrai_if_" + n_if );
+                PW.println("    jmp faux_if_" + n_if);
+                break;
+        }
+        PW.println("vrai_if_" + n_if + " :");
+        parcourArbre(a.getFd().getFg());
+        PW.println("faux_if_" + n_if + " :");
+        parcourArbre(a.getFd().getFd());
+    }
+
+    //Finals
     private void ecrireIdent(Arbre a) {
         PW.println("    mov eax, " + a.getVal());
     }
@@ -143,8 +210,5 @@ class codeGenerator {
         PW.println("    mov eax, " + a.getVal());
     }
 
-    private void ecrireLet(Arbre a) {
-        parcourArbre(a.getFd());
-        PW.println("    mov " + a.getFg().getVal() + ", eax" );
-    }
+
 }
