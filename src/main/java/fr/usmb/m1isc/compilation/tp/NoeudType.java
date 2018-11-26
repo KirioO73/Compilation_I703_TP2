@@ -1,7 +1,7 @@
 package fr.usmb.m1isc.compilation.tp;
 
 public enum NoeudType {
-
+    //TODO ORGA
     ENTIER,
 
     // logique

@@ -10,40 +10,71 @@ import java.util.List;
 class codeGenerator {
     private Arbre A;
     private List<String> variables;
-    //private PrintWriter PW;
+    private PrintWriter PW;
 
     codeGenerator( Arbre A, String Path) throws FileNotFoundException {
         this.A = A;
         this.variables = new ArrayList<String>();
-        PrintWriter PW = new PrintWriter(new FileOutputStream(Path));
-        genereData(PW);
-        genereCode(PW);
+        PW = new PrintWriter(new FileOutputStream(Path));
+        genereData();
+        genereCode();
         PW.close();
     }
 
-    private void genereData(PrintWriter PW){
+    private void genereData(){
         PW.println("DATA SEGMENT");
-        // TODO : Get all data from arbre
         findLet(A);
+        for (String variable : this.variables) PW.println(variable + " DD");
         PW.println("DATA ENDS");
     }
 
-    private void findLet(Arbre T) {
-        if (T == null) return;
+    private void findLet(Arbre a) {
+        if (a == null) return;
         else {
-            if (T.getType() == NoeudType.LET) {
-                this.variables.add(T.getFd().getVal());
-                findLet(T.getFg());
+            if (a.getType() == NoeudType.LET) {
+                this.variables.add(a.getFg().getVal());
+                findLet(a.getFg());
             } else {
-                findLet(T.getFd());
-                findLet(T.getFg());
+                findLet(a.getFd());
+                findLet(a.getFg());
             }
         }
     }
 
-    private void genereCode(PrintWriter PW){
+    private void genereCode(){
         PW.println("CODE SEGMENT");
         // TODO : Get all codes from arbre
+        parcourArbre(A);
         PW.println("CODE ENDS");
+    }
+
+    private void parcourArbre( Arbre a) {
+        if(a==null);
+        else{
+            switch (a.getType()){
+                case SEMI:
+                    parcourArbre(a.getFg());
+                    parcourArbre(a.getFd());
+                case LET:
+                    ecrireLet(a);
+                    break;
+                case ENTIER:
+                    ecrireEntier(a);
+                    break;
+                default:
+                    parcourArbre(a.getFg());
+                    parcourArbre(a.getFd());
+                    PW.println("Default");
+            }
+        }
+    }
+
+    private void ecrireEntier(Arbre a) {
+        PW.println("mov eax," + a.getVal());
+    }
+
+    private void ecrireLet(Arbre a) {
+        parcourArbre(a.getFd());
+        PW.println("mov " + a.getFg().getVal() + ", eax" );
     }
 }
