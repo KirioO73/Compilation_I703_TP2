@@ -19,7 +19,7 @@ public class Main {
 		parser p = new parser (yy);
 		Symbol s = p.parse( );
 		Arbre a = (Arbre) s.value;
-		// TODO: generer code
+		//Generer Code ASM
         codeGenerator G = new codeGenerator(a, args[1]);
 		a.AfficheArbre();
 	}

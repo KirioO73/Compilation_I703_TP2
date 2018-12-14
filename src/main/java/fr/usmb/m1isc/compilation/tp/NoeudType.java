@@ -1,37 +1,29 @@
 package fr.usmb.m1isc.compilation.tp;
 
 public enum NoeudType {
-    //TODO ORGA
     ENTIER,
-
+    IDENT,
     // logique
-
-    AND,
-	OR,
-    EGAL,
     IF,
     ACTION, // then ou else
-
-    //comparateurs
-
+    //Boolean operators
     GT,       // "<"
     GTE,      // "<="
-
-    //operateurs
-
+    AND,      // "&&"
+    OR,       // "||"
+    EGAL,     // "==" ou "="
+    //Arithmetic operators
     PLUS,
     MOINS,
     MOINS_UNAIRE,
     MUL,
     DIV,
     MOD,
-
     // autre
     OUTPUT,
     INPUT,
     WHILE,
     LET,
     NIL,
-    IDENT,
-    SEMI;
+    SEMI
 }
