@@ -1,0 +1,7 @@
+let nombre1 = input;
+let nombre2 = input;
+if (nombre1 = 0 or nombre1 < nombre2 and nombre1 = 0)
+then let sortie = 0
+else let sortie = 1;
+output sortie.
+

@@ -1,0 +1,5 @@
+let nb = input;
+if (100 < nb)
+then let sortie = 0
+else let sortie = 1;
+output sortie.

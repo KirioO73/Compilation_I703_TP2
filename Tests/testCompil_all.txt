@@ -1,0 +1,8 @@
+let nombre1 = input;
+let nombre2 = input;
+let compteur = 0;
+while((nombre1 = nombre2 or nombre2 = 0) and compteur < 10)
+do (let compteur = compteur + 1;);
+output compteur;
+output nombre1;
+output nombre2.
